@@ -748,6 +748,7 @@ public class Employee {
 
 
  ✅ **Good example**
+ 
 Now this way each module would have only one reason to change.
 
  ```java
@@ -785,3 +786,53 @@ public class ReportPrinter {
 }
 ```
 
+
+### Open-close principle(OPC)
+- A software artifact must be open for extension but closed for modification.
+- We must be able to increase the functionality of a software artifact without modifying existing functionalities. 
+
+❌ **Bad example**
+
+In this expample we have a classe with one function that process payments, the problem that every time a payment is added the function must be modified.
+```java
+ public class PaymentProcessor {
+    public void process(String paymentType) {
+        if (paymentType.equals("credit")) {
+            System.out.println("Processing credit card payment...");
+        } else if (paymentType.equals("paypal")) {
+            System.out.println("Processing PayPal payment...");
+        }
+    }
+}
+```
+
+✅ **Good example** 
+
+But if we use an interface that allows us to create implementations for different types of payments.
+
+```java
+public interface Payment {
+    void process();
+}
+
+public class CreditCardPayment implements Payment {
+    public void process() {
+        ....
+}
+
+public class CreditCardPayment implements Payment {
+    public void process() {
+        ....
+}
+
+```
+
+Now the payment processing class will not be modified and any other payment methods implemented will work.
+
+```java
+public class PaymentProcessor {
+    public void processPayment(Payment payment) {
+        payment.process();
+    }
+}
+```
