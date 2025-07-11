@@ -651,7 +651,7 @@ In this example, the **EasyGame** class inherits from **Game**, which in turn im
 
   ```
 
-  ✅ **Good exampleo**
+  ✅ **Good example**
 
   Instead, it would be recommended to use the constant directly from the class or statically import the classes with the constants.
    ```java
@@ -702,3 +702,86 @@ They are a set of principles proposed by Robert C. Marin that will help us:
 - Create a **clean and maintainable architecture**
 - Write code that is **easier to read** and understand
 - Create modules with high **cohesion and loose coupling**
+### Cohesion 
+- It is the degree to which the elements of a module are related.
+- We are interested in a module having a bery high cohesion.
+
+
+### coupling
+- Degree to which two modules are related to each other.
+- the modules should have little coupling. 
+- if a module is modified, *it should affect the others as little as possible.*
+
+### Single responsability principle (SRP)
+
+- A module should have **one reason to change,** not that a module should do one thing.
+- A module must be **responsable for a single user of the system.**
+
+❌ **Bad example**
+  
+In this example, the module would have more than one reason to change.
+
+- If the employee information changes.
+- If the way the annual salary is calculated changes.
+- If changes need to be made to the report.
+
+```java
+public class Employee {
+    private String name;
+    private double salary;
+
+    public Employee(String name, double salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+
+    public double calculateAnnualSalary() {
+        return salary * 12;
+    }
+
+    public void printReport() {
+        System.out.println("Employee: " + name);
+        System.out.println("Annual Salary: " + calculateAnnualSalary());
+    }
+}
+```
+
+
+ ✅ **Good example**
+Now this way each module would have only one reason to change.
+
+ ```java
+public class Employee {
+    private String name;
+    private double salary;
+
+    public Employee(String name, double salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+}
+ ```
+```java
+public class SalaryCalculator {
+    public double calculateAnnualSalary(Employee employee) {
+        return employee.getSalary() * 12;
+    }
+}
+```
+```java
+public class ReportPrinter {
+    public void print(Employee employee, double annualSalary) {
+        System.out.println("Employee: " + employee.getName());
+        System.out.println("Annual Salary: " + annualSalary);
+    }
+}
+```
+
