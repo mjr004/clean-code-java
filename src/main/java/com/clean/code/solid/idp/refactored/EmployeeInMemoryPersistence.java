@@ -1,13 +1,13 @@
-package com.clean.code.solid.ocp.refactored;
+package com.clean.code.solid.idp.refactored;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProgrammerMemoryPersistence implements EmployeePersistence{
+public class EmployeeInMemoryPersistence implements EmployeePersistence{
 
     private List<Employee> employees;
 
-    public ProgrammerMemoryPersistence() {
+    public EmployeeInMemoryPersistence() {
     	employees = new ArrayList<Employee>();
     }
 

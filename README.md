@@ -836,3 +836,188 @@ public class PaymentProcessor {
     }
 }
 ```
+### Liskov Substitution Principle (LSP)
+All classes that inherit from another can be used interchangeably without any problem, including the parent class.
+
+❌ **Bad example**
+
+The **Dog and  Delphin** classes inherit from **Mammal**, but the **Delphin** class in the function **Walk** throw an exception because a dolphin doesn't walk, **¡that violates this principle!** because if a class has an **Mammal** object whatever implementation, it not be cause any problem.
+```java
+public class Mammal {
+    private Integer weight;
+    private Integer ageInDays;
+
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public Integer getAgeInDays() {
+        return ageInDays;
+    }
+
+    public void walk() {
+        System.out.println("I am walking");
+    }
+    
+}
+
+public class Dog extends Mammal {
+
+}
+
+public class Delphin extends Mammal {
+
+	@Override
+	public void walk() {
+	   throw new CannotWalkException("I am a dolphin, I cannot walk!");
+	}
+}
+```
+✅ **Good example** 
+
+The correct thing to do would be to create a new interface that containing that function and remove it from **Mammal** so that all **Mammal** implementations have the same behavior.
+
+```java
+public class landMammal extends Mammal{
+	public void walk() {
+        System.out.println("I am walking");
+    }
+}
+
+public class Mammal {
+    private Integer weight;
+    private Integer ageInDays;
+
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public Integer getAgeInDays() {
+        return ageInDays;
+    }
+}
+
+public class Dog extends landMammal{
+
+}
+
+public class Delphin extends Mammal {
+  
+}
+
+```
+### Interface segregation principle (ISP)
+Any client must be depend on functions they don't use.
+
+❌ **Bad example**
+
+We have this interface that defines mathematical operations for two calculators, one basic and one advanced.
+
+```java
+public interface Operations {
+
+	public Double add(Double a, Double b);
+
+    public Double subtract(Double a, Double b);
+
+    public Double multiply(Double a, Double b);
+
+    public Double divide(Double a, Double b);
+
+    public Double sine(Double angle);
+
+    public Double cosine(Double angle);
+}
+
+
+```
+Only the advanced calculator takes of all the functions, while the basic calculator would look something like this.
+```java
+public class BasicCalculator implements Operations {
+   
+    /...
+
+    @Override
+    public Double sine(Double angle) {
+        throw new UnsupportedOperationException(
+                "Basic Calculator does not support trigonometric operations");
+    }
+
+    @Override
+    public Double cosine(Double angle) {
+        throw new UnsupportedOperationException(
+                "Basic Calculator does not support trigonometric operations");
+    }
+
+}
+
+```
+
+✅ **Good example** 
+
+The correct thing is for the basic calculator implementing an interface that only contains the funcitons it needs.
+
+```java
+public interface Operations {
+    
+	public Double add(Double a, Double b);
+
+    public Double subtract(Double a, Double b);
+
+    public Double multiply(Double a, Double b);
+
+    public Double divide(Double a, Double b);
+
+    public Double sine(Double angle);
+
+    public Double cosine(Double angle);
+}
+```
+
+This new interface would be for the advanced calculator.
+```java
+public interface TrigonometricOperations {
+	public Double sine(Double angle);
+    public Double cosine(Double angle);
+}
+
+public class AdvancedCalculator implements Operations, TrigonometricOperations {
+  //...
+}
+```
+
+Now it would be like this without those two unnecessary methods.
+```java
+public class BasicCalculator implements Operations {
+
+    @Override
+    public Double add(Double a, Double b) {
+        return a + b;
+    }
+
+    @Override
+    public Double subtract(Double a, Double b) {
+        return a - b;
+    }
+
+    @Override
+    public Double multiply(Double a, Double b) {
+        return a * b;
+    }
+
+    @Override
+    public Double divide(Double a, Double b) {
+        return a / b;
+    }
+}
+```
+
+
+
+
+### Dependency inversion principle (DIP)
+- The most flexible systems are those that depend on abstractions, not concreteness.
+- In Java, a module must depend on interfaces or abstract classes, not volatile implementations.
+- This is achieved through mechanisms that create instances of the desired implementations.
+- Dependency inversion is expensive.
+- ⚠️Analyze whether a module is **volatile** or not⚠️ before abstracting dependencies in this way.

@@ -1,12 +1,14 @@
-package com.clean.code.solid.ocp.refactored;
+package com.clean.code.solid.idp.refactored;
 
 import java.util.List;
+
+import com.clean.code.solid.idp.factory.EmployeePersistencFactory;
 
 public class Company {
 
     private EmployeePersistence persistence;
 
-    public Company() {
+    public Company(EmployeePersistencFactory employeePersistencFactory) {
         persistence = new EmployeeInMemoryPersistence();
     }
 

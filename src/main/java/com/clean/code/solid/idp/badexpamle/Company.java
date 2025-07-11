@@ -1,4 +1,4 @@
-package com.clean.code.solid.ocp.refactored;
+package com.clean.code.solid.idp.badexpamle;
 
 import java.util.List;
 
