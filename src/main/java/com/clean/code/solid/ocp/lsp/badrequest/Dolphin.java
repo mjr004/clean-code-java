@@ -2,7 +2,7 @@ package com.clean.code.solid.ocp.lsp.badrequest;
 
 import com.clean.code.exceptions.CannotWalkException;
 
-public class Delphin extends Mammal {
+public class Dolphin extends Mammal {
 
 	  @Override
 	    public void walk() {
