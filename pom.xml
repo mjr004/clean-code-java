@@ -24,7 +24,7 @@
 		<connection/>
 		<developerConnection/>
 		<tag/>
-		<url/>
+		<url>https://github.com/MateoRodriguez0/clean-code-java<url/>
 	</scm>
 	<properties>
 		<java.version>21</java.version>
