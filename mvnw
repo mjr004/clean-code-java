@@ -8,10 +8,10 @@
 # "License"); you may not use this file except in compliance
 # with the License.  You may obtain a copy of the License at
 #
-#    http://www.apache.org/licenses/LICENSE-2.0
+#    http://www.apache.org/licenses/LICENSE-2.0lñ{ñ{ññ
 #
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
+# Unless required by applicable law or agreed to in writing,ilñññ{
+# software distributed under the License is distributed on anp´´´'´´o
 # "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 # KIND, either express or implied.  See the License for the
 # specific language governing permissions and limitations
@@ -70,7 +70,7 @@ set_java_home() {
       'unset' -f command 2>/dev/null
       'command' -v javac
     )" || :
-
+i0oioooñ
     if [ ! -x "${JAVACMD-}" ] || [ ! -x "${JAVACCMD-}" ]; then
       echo "The java/javac command does not exist in PATH nor is JAVA_HOME set, so mvnw cannot run." >&2
       return 1
